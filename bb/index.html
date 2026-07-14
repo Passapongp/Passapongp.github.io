@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BB's Learning ⭐</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="หน้าเรียนสนุกของ BB">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%AD%90%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mali:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --ink:#2E3A59;
+    --ink-soft:#6B7A99;
+  }
+  body{
+    font-family:'Mali','Baloo 2',-apple-system,sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    background:linear-gradient(180deg,#eaf6ff 0%,#f4ecff 55%,#fff5e8 100%);
+    overflow-x:hidden;
+    position:relative;
+  }
+  /* floating deco */
+  .deco{position:fixed;font-size:34px;opacity:.55;pointer-events:none;animation:float 6s ease-in-out infinite;z-index:0}
+  .deco.d1{top:8%;left:8%;animation-delay:0s}
+  .deco.d2{top:14%;right:10%;font-size:28px;animation-delay:1.2s}
+  .deco.d3{bottom:12%;left:12%;font-size:30px;animation-delay:.6s}
+  .deco.d4{bottom:18%;right:8%;animation-delay:1.8s}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+
+  .wrap{max-width:640px;margin:0 auto;padding:48px 22px 60px;position:relative;z-index:1}
+
+  header{text-align:center;margin-bottom:38px}
+  .mascot{font-size:74px;line-height:1;display:inline-block;animation:pop 2.6s ease-in-out infinite}
+  @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.12) rotate(-6deg)}}
+  h1{font-family:'Baloo 2','Mali',sans-serif;font-weight:800;font-size:clamp(38px,10vw,58px);color:#3A2E7A;line-height:1.05;margin:10px 0 6px;letter-spacing:.5px}
+  .subtitle{font-size:18px;color:var(--ink-soft);font-weight:500}
+
+  .set-label{display:inline-flex;align-items:center;gap:9px;background:#fff;border:3px solid #ffd166;color:#B4820E;
+    font-family:'Baloo 2',sans-serif;font-weight:700;font-size:19px;padding:8px 22px;border-radius:100px;
+    box-shadow:0 6px 0 rgba(255,209,102,.35);margin:6px 0 22px}
+
+  .cards{display:flex;flex-direction:column;gap:18px}
+  .card{
+    display:flex;align-items:center;gap:18px;text-decoration:none;color:var(--ink);
+    background:#fff;border:3px solid var(--c);border-radius:26px;padding:20px 22px;
+    box-shadow:0 8px 0 color-mix(in srgb, var(--c) 32%, #fff), 0 14px 30px rgba(46,58,89,.10);
+    transition:transform .16s ease, box-shadow .16s ease;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .card:active{transform:translateY(2px);box-shadow:0 4px 0 color-mix(in srgb, var(--c) 32%, #fff), 0 8px 18px rgba(46,58,89,.10)}
+  .badge{flex-shrink:0;width:66px;height:66px;border-radius:20px;background:var(--c);
+    display:flex;align-items:center;justify-content:center;font-size:34px;
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,.08)}
+  .txt{flex:1;min-width:0}
+  .ttl{font-family:'Baloo 2','Mali',sans-serif;font-weight:700;font-size:23px;line-height:1.15;color:var(--ink)}
+  .sub{font-size:15px;color:var(--ink-soft);margin-top:2px}
+  .arrow{flex-shrink:0;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:26px;color:var(--c)}
+
+  footer{text-align:center;margin-top:44px;font-size:14px;color:var(--ink-soft)}
+  .heart{color:#ff6b8a}
+</style>
+</head>
+<body>
+  <div class="deco d1">☁️</div>
+  <div class="deco d2">⭐</div>
+  <div class="deco d3">🎈</div>
+  <div class="deco d4">🌈</div>
+
+  <div class="wrap">
+    <header>
+      <div class="mascot">⭐</div>
+      <h1>BB's Learning</h1>
+      <div class="subtitle">มาเรียนภาษาอังกฤษกันเถอะ! 🎉</div>
+    </header>
+
+    <div id="content"></div>
+
+    <footer>ทำด้วย <span class="heart">❤️</span> เพื่อ BB</footer>
+  </div>
+
+  <script>
+    // ▼▼ เพิ่มบทเรียนใหม่ที่นี่ได้เลย — ก็อป 1 บล็อกแล้วแก้ค่า ▼▼
+    const SETS = [
+      {
+        label: 'Set 4 · Movers',
+        items: [
+          { emoji:'📖', title:'Word List 4', sub:'คำศัพท์ Cambridge Movers', color:'#FFB703',
+            url:'https://claude.ai/public/artifacts/a83003b0-4d54-4c1f-beae-94460f5007c8' },
+          { emoji:'✏️', title:'Mini-test 4.1', sub:'แบบทดสอบ', color:'#4CC9F0',
+            url:'https://claude.ai/public/artifacts/64772e23-a908-4a66-b2ec-16437eeb4ad1' },
+          { emoji:'📝', title:'Mini-test 4.2', sub:'แบบทดสอบ', color:'#8AC926',
+            url:'https://claude.ai/public/artifacts/61c71900-9dc3-4000-900b-08ebd1261c7f' },
+        ]
+      }
+      // , { label:'Set 5', items:[ { emoji:'📖', title:'...', sub:'...', color:'#F15BB5', url:'...' } ] }
+    ];
+    // ▲▲ เพิ่มบทเรียนใหม่ด้านบนนี้ ▲▲
+
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    document.getElementById('content').innerHTML = SETS.map(set => `
+      <div class="set-label">🗂️ ${esc(set.label)}</div>
+      <div class="cards">
+        ${set.items.map(it => `
+          <a class="card" href="${esc(it.url)}" target="_blank" rel="noopener" style="--c:${esc(it.color)}">
+            <div class="badge">${it.emoji}</div>
+            <div class="txt">
+              <div class="ttl">${esc(it.title)}</div>
+              <div class="sub">${esc(it.sub)}</div>
+            </div>
+            <div class="arrow">→</div>
+          </a>`).join('')}
+      </div>`).join('');
+  </script>
+</body>
+</html>
