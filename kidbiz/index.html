@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KidBiz Academy — The Smartest Investment Is Your Child (Prototype)</title>
+<meta name="description" content="A hands-on academy where kids aged 9–13 build a real business, earn real money, and learn to save, spend and share it wisely. For EP / Bilingual / International families in Thailand.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪙</text></svg>">
+<style>
+  :root{
+    --bg:#FBF8F1; --surface:#FFFFFF; --ink:#1F2B24; --muted:#5C6B62;
+    --green:#0E7A5F; --green-deep:#0A5C48; --gold:#F5B82E; --gold-soft:#FDEBBE;
+    --coral:#F06B4F; --line:#E7E0D2; --card-shadow:0 10px 30px rgba(30,43,36,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#111C17; --surface:#18261F; --ink:#EEF3EE; --muted:#9DB0A4;
+      --green:#3BB98F; --green-deep:#2E9E78; --gold:#F5B82E; --gold-soft:#2E3A26;
+      --line:#28372F; --card-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#111C17; --surface:#18261F; --ink:#EEF3EE; --muted:#9DB0A4;
+    --green:#3BB98F; --green-deep:#2E9E78; --gold:#F5B82E; --gold-soft:#2E3A26;
+    --line:#28372F; --card-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#FBF8F1; --surface:#FFFFFF; --ink:#1F2B24; --muted:#5C6B62;
+    --green:#0E7A5F; --green-deep:#0A5C48; --gold:#F5B82E; --gold-soft:#FDEBBE;
+    --coral:#F06B4F; --line:#E7E0D2; --card-shadow:0 10px 30px rgba(30,43,36,.08);
+  }
+  *{box-sizing:border-box; margin:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important; animation:none!important} }
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans Thai","Leelawadee UI","Sukhumvit Set",-apple-system,"Segoe UI",sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  /* language switching: body.en hides .th, body.th hides .en */
+  body.en .th{display:none!important}
+  body.th .en{display:none!important}
+  a{color:inherit}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+  .eyebrow{
+    font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--green); display:inline-flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{content:""; width:22px; height:3px; background:var(--gold); border-radius:2px}
+  h1,h2,h3{line-height:1.25; text-wrap:balance; font-weight:800}
+  h2{font-size:clamp(1.5rem,3.2vw,2.1rem); margin:10px 0 14px}
+  .lead{color:var(--muted); max-width:38em}
+  section{padding:72px 0}
+
+  nav{position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--line)}
+  .nav-in{display:flex; align-items:center; gap:24px; padding:14px 24px; max-width:1080px; margin:0 auto}
+  .logo{font-weight:800; font-size:1.15rem; display:flex; align-items:center; gap:9px; text-decoration:none}
+  .logo-mark{width:34px; height:34px; border-radius:10px; background:var(--green); color:#fff; display:grid; place-items:center; font-size:1.05rem}
+  .logo small{display:block; font-size:.62rem; font-weight:600; color:var(--muted); letter-spacing:.08em; line-height:1}
+  .nav-links{display:flex; gap:22px; margin-left:auto; font-size:.92rem; font-weight:600}
+  .nav-links a{text-decoration:none; color:var(--muted)}
+  .nav-links a:hover{color:var(--green)}
+  .btn{
+    display:inline-block; background:var(--green); color:#fff; text-decoration:none;
+    padding:12px 26px; border-radius:999px; font-weight:700; font-size:.95rem;
+    border:none; cursor:pointer; transition:transform .15s ease, background .15s ease;
+    font-family:inherit;
+  }
+  .btn:hover{background:var(--green-deep); transform:translateY(-1px)}
+  .btn:focus-visible, a:focus-visible, .lang-toggle:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
+  .btn.ghost{background:transparent; color:var(--green); border:2px solid var(--green)}
+  .btn.ghost:hover{background:var(--green); color:#fff}
+  .nav-cta{padding:9px 20px; font-size:.88rem}
+  .lang-toggle{
+    background:transparent; border:1.5px solid var(--line); color:var(--muted);
+    border-radius:999px; padding:7px 16px; font-weight:700; font-size:.82rem;
+    cursor:pointer; font-family:inherit;
+  }
+  .lang-toggle:hover{border-color:var(--green); color:var(--green)}
+
+  .hero{padding:64px 0 40px}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center}
+  .hero h1{font-size:clamp(1.9rem,4.4vw,2.95rem); margin:16px 0 18px}
+  .hero h1 em{font-style:normal; color:var(--green); position:relative; white-space:nowrap}
+  .hero h1 em::after{
+    content:""; position:absolute; left:0; right:0; bottom:4px; height:.34em;
+    background:var(--gold); opacity:.4; z-index:-1; border-radius:3px;
+  }
+  .hero .lead{font-size:1.06rem; margin-bottom:28px}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+  .hero-note{font-size:.82rem; color:var(--muted); margin-top:14px}
+  .hero-art{background:var(--surface); border:1px solid var(--line); border-radius:24px; box-shadow:var(--card-shadow); overflow:hidden}
+  .hero-art svg{display:block; width:100%; height:auto}
+
+  .stats{background:var(--green); color:#fff; padding:34px 0}
+  .stats-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; text-align:center}
+  .stat b{display:block; font-size:clamp(1.5rem,3vw,2rem); font-variant-numeric:tabular-nums}
+  .stat span{font-size:.85rem; opacity:.85}
+  .stats .src{text-align:center; font-size:.7rem; opacity:.6; margin-top:18px}
+
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:36px}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    padding:28px 26px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; gap:12px;
+    transition:transform .15s ease;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .card .tag{
+    align-self:flex-start; font-size:.7rem; font-weight:700; letter-spacing:.1em;
+    background:var(--gold-soft); color:var(--ink); padding:4px 12px; border-radius:999px;
+  }
+  .card .tag.soon{background:transparent; border:1px dashed var(--muted); color:var(--muted)}
+  .card h3{font-size:1.2rem}
+  .card p{font-size:.92rem; color:var(--muted); flex-grow:1}
+  .card .price{font-weight:800; font-size:1.1rem; color:var(--green)}
+  .card .price small{font-weight:600; color:var(--muted); font-size:.78rem}
+  .card ul{padding-left:0; list-style:none; font-size:.88rem; display:flex; flex-direction:column; gap:6px}
+  .card ul li::before{content:"✓"; color:var(--green); font-weight:800; margin-right:8px}
+
+  .loop{counter-reset:step}
+  .loop-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px}
+  .step{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px; position:relative}
+  .step::before{
+    counter-increment:step; content:counter(step);
+    position:absolute; top:-14px; left:18px; width:30px; height:30px; border-radius:50%;
+    background:var(--gold); color:#3A2C00; font-weight:800; font-size:.9rem;
+    display:grid; place-items:center; border:3px solid var(--bg);
+  }
+  .step h3{font-size:1rem; margin-bottom:6px; padding-top:4px}
+  .step p{font-size:.86rem; color:var(--muted)}
+
+  .env-band{background:var(--surface); border-block:1px solid var(--line)}
+  .env-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center}
+  .env-art svg{width:100%; height:auto; display:block}
+  .env-list{display:flex; flex-direction:column; gap:18px; margin-top:24px}
+  .env-item{display:flex; gap:16px; align-items:flex-start}
+  .env-icon{flex:none; width:46px; height:46px; border-radius:14px; display:grid; place-items:center; font-size:1.3rem; background:var(--gold-soft)}
+  .env-item b{display:block; margin-bottom:2px}
+  .env-item p{font-size:.9rem; color:var(--muted)}
+
+  .see-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:36px}
+  .see{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px; text-align:center}
+  .see .ic{font-size:1.8rem; display:block; margin-bottom:10px}
+  .see b{font-size:.95rem; display:block; margin-bottom:4px}
+  .see p{font-size:.82rem; color:var(--muted)}
+
+  .quotes{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:36px}
+  .quote{background:var(--surface); border:1px solid var(--line); border-left:5px solid var(--gold); border-radius:16px; padding:26px}
+  .quote p{font-size:.98rem; margin-bottom:14px}
+  .quote footer{font-size:.82rem; color:var(--muted); font-weight:600}
+  .mock-note{font-size:.72rem; color:var(--muted); margin-top:14px}
+
+  details{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 22px; margin-top:12px}
+  summary{font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px}
+  summary::after{content:"+"; font-size:1.3rem; color:var(--green); font-weight:400; flex:none}
+  details[open] summary::after{content:"–"}
+  details p{margin-top:10px; font-size:.92rem; color:var(--muted)}
+
+  .final{background:var(--green); color:#fff; border-radius:28px; padding:56px 48px; text-align:center}
+  .final h2{color:#fff}
+  .final p{opacity:.9; max-width:36em; margin:0 auto 28px}
+  .final .btn{background:var(--gold); color:#3A2C00}
+  .final .btn:hover{background:#E5A81F}
+
+  footer.site{padding:44px 0 60px; font-size:.82rem; color:var(--muted)}
+  .foot-grid{display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:28px}
+  .proto{margin-top:20px; padding:10px 16px; border:1px dashed var(--muted); border-radius:10px; font-size:.75rem; display:inline-block}
+
+  @media (max-width:840px){
+    .hero-grid,.env-grid{grid-template-columns:1fr}
+    .cards,.loop-grid{grid-template-columns:1fr}
+    .see-grid,.quotes,.stats-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+    section{padding:52px 0}
+  }
+  @media (max-width:520px){
+    .see-grid,.quotes,.stats-grid{grid-template-columns:1fr}
+    .final{padding:40px 24px}
+  }
+</style>
+</head>
+<body class="en">
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#top">
+      <span class="logo-mark">฿</span>
+      <span>KidBiz Academy<small>MONEY & BUSINESS SKILLS FOR KIDS</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#programs"><span class="en">Programs</span><span class="th">โปรแกรม</span></a>
+      <a href="#how"><span class="en">How It Works</span><span class="th">วิธีเรียน</span></a>
+      <a href="#money"><span class="en">Money Skills</span><span class="th">ทักษะการเงิน</span></a>
+      <a href="#faq"><span class="en">FAQ</span><span class="th">คำถามที่พบบ่อย</span></a>
+    </div>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()" aria-label="Switch language">ไทย</button>
+    <a class="btn nav-cta" href="#cta"><span class="en">Reserve a Seat</span><span class="th">จองที่นั่ง</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="en">Ages 9–13 · EP / Bilingual / International Families</span><span class="th">สำหรับเด็ก 9–13 ปี · ครอบครัว EP / Bilingual / International</span></span>
+      <h1>
+        <span class="en">You invest in their education.<br>This is the investment in <em>everything after.</em></span>
+        <span class="th">คุณลงทุนกับการศึกษาของลูกมาตลอด<br>นี่คือการลงทุนใน<em>ชีวิตที่เหลือของเขา</em></span>
+      </h1>
+      <p class="lead">
+        <span class="en">A hands-on academy where your child builds a real business from something they love, sells to real customers, counts real profit — and learns to <strong>save, spend and share</strong> like someone who understands the value of money.</span>
+        <span class="th">Academy ที่ลูกได้สร้างธุรกิจจริงจากสิ่งที่เขารัก ขายให้ลูกค้าจริง นับกำไรด้วยมือตัวเอง — และเรียนรู้ที่จะ<strong>ออม ใช้ และแบ่งปัน</strong> อย่างคนที่เข้าใจค่าของเงิน</span>
+      </p>
+      <div class="hero-ctas">
+        <a class="btn" href="#cta"><span class="en">Reserve a Pilot Seat</span><span class="th">จองที่นั่ง Workshop รุ่นแรก</span></a>
+        <a class="btn ghost" href="#programs"><span class="en">Explore Programs</span><span class="th">ดูโปรแกรมทั้งหมด</span></a>
+      </div>
+      <p class="hero-note">
+        <span class="en">Pilot cohort limited to 18 kids · Taught bilingually in English & Thai · Kids keep 100% of their profit</span>
+        <span class="th">รอบ Pilot รับเพียง 18 คน · สอนสองภาษา อังกฤษ–ไทย · กำไรจากการขายเป็นของเด็ก 100%</span>
+      </p>
+    </div>
+    <figure class="hero-art" aria-label="Illustration of a child running a lemonade stand with a customer">
+      <svg viewBox="0 0 560 430" xmlns="http://www.w3.org/2000/svg" role="img">
+        <rect width="560" height="430" fill="#DCEEE3"/>
+        <circle cx="470" cy="70" r="38" fill="#F5B82E"/>
+        <circle cx="90" cy="330" r="70" fill="#CBE4D4"/>
+        <circle cx="500" cy="330" r="55" fill="#CBE4D4"/>
+        <rect x="150" y="220" width="260" height="120" rx="8" fill="#0E7A5F"/>
+        <rect x="150" y="220" width="260" height="34" fill="#0A5C48"/>
+        <text x="280" y="245" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#FDEBBE">LEMONADE ฿20</text>
+        <g>
+          <rect x="130" y="128" width="300" height="46" rx="10" fill="#F5B82E"/>
+          <rect x="160" y="128" width="40" height="46" fill="#FDEBBE"/>
+          <rect x="240" y="128" width="40" height="46" fill="#FDEBBE"/>
+          <rect x="320" y="128" width="40" height="46" fill="#FDEBBE"/>
+          <rect x="136" y="170" width="288" height="10" rx="5" fill="#E5A81F"/>
+        </g>
+        <rect x="140" y="174" width="10" height="166" fill="#B98A3C"/>
+        <rect x="410" y="174" width="10" height="166" fill="#B98A3C"/>
+        <g>
+          <circle cx="280" cy="182" r="26" fill="#F3C9A5"/>
+          <path d="M254 176 a26 26 0 0 1 52 0 l0 -8 a26 20 0 0 0 -52 0 z" fill="#22201E"/>
+          <rect x="252" y="152" width="56" height="14" rx="7" fill="#22201E"/>
+          <circle cx="271" cy="184" r="3" fill="#22201E"/>
+          <circle cx="289" cy="184" r="3" fill="#22201E"/>
+          <path d="M272 196 q8 7 16 0" stroke="#22201E" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <rect x="258" y="206" width="44" height="22" rx="10" fill="#F06B4F"/>
+        </g>
+        <rect x="180" y="196" width="34" height="28" rx="6" fill="#FDEBBE"/>
+        <rect x="186" y="188" width="22" height="10" rx="4" fill="#F5B82E"/>
+        <rect x="330" y="204" width="14" height="18" rx="3" fill="#FDEBBE"/>
+        <rect x="350" y="204" width="14" height="18" rx="3" fill="#FDEBBE"/>
+        <g>
+          <circle cx="480" cy="238" r="22" fill="#EDBB92"/>
+          <path d="M458 234 a22 22 0 0 1 44 0 l0 -10 a22 16 0 0 0 -44 0 z" fill="#2B2320"/>
+          <rect x="466" y="228" width="6" height="14" fill="#2B2320"/>
+          <circle cx="473" cy="240" r="2.6" fill="#2B2320"/>
+          <circle cx="488" cy="240" r="2.6" fill="#2B2320"/>
+          <path d="M474 250 q7 6 14 0" stroke="#2B2320" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="458" y="260" width="44" height="80" rx="16" fill="#4A90D9"/>
+          <rect x="434" y="266" width="30" height="12" rx="6" fill="#EDBB92"/>
+          <circle cx="430" cy="272" r="9" fill="#F5B82E" stroke="#E5A81F" stroke-width="2"/>
+          <text x="430" y="276" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#7A5A00">฿</text>
+        </g>
+        <g>
+          <circle cx="196" cy="360" r="14" fill="#F5B82E" stroke="#E5A81F" stroke-width="3"/>
+          <circle cx="226" cy="370" r="14" fill="#F5B82E" stroke="#E5A81F" stroke-width="3"/>
+          <circle cx="211" cy="384" r="14" fill="#F5B82E" stroke="#E5A81F" stroke-width="3"/>
+          <text x="196" y="365" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#7A5A00">฿</text>
+          <text x="226" y="375" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#7A5A00">฿</text>
+          <text x="211" y="389" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#7A5A00">฿</text>
+        </g>
+        <rect x="0" y="400" width="560" height="30" fill="#CBE4D4"/>
+      </svg>
+    </figure>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><b>~90%</b><span><span class="en">Thai household debt to GDP —<br>most adults were never taught about money</span><span class="th">หนี้ครัวเรือนไทยต่อ GDP —<br>ผู้ใหญ่จำนวนมากไม่เคยถูกสอนเรื่องเงิน</span></span></div>
+      <div class="stat"><b><span class="en">0 hours</span><span class="th">0 ชั่วโมง</span></b><span><span class="en">of personal finance<br>in Thailand's core school curriculum</span><span class="th">วิชา "การเงินส่วนบุคคล"<br>ในหลักสูตรพื้นฐานของไทย</span></span></div>
+      <div class="stat"><b><span class="en">4.1M kids/year</span><span class="th">4.1 ล้านคน/ปี</span></b><span><span class="en">learn money skills through programs<br>like this in 116 countries worldwide</span><span class="th">เด็กทั่วโลกที่เรียนทักษะการเงิน<br>ผ่านโปรแกรมแบบเดียวกันนี้ใน 116 ประเทศ</span></span></div>
+    </div>
+    <p class="src"><span class="en">Sources: NESDC · OECD/PISA · Aflatoun International</span><span class="th">อ้างอิง: NESDC · OECD/PISA · Aflatoun International</span></p>
+  </div>
+</div>
+
+<section id="programs">
+  <div class="wrap">
+    <span class="eyebrow">Programs</span>
+    <h2><span class="en">Three ways to start the investment</span><span class="th">สามจุดเริ่มต้นของการลงทุนครั้งนี้</span></h2>
+    <p class="lead">
+      <span class="en">Every program follows one principle: kids learn by <strong>doing the real thing</strong> — not by watching slides. Modeled on world-class programs like JA BizTown and Camp SuperNova.</span>
+      <span class="th">ทุกโปรแกรมใช้หลักเดียวกัน: เด็กเรียนรู้จากการ<strong>ลงมือทำจริง</strong> ไม่ใช่จากสไลด์ — ออกแบบตามแนวทางโปรแกรมชั้นนำระดับโลกอย่าง JA BizTown และ Camp SuperNova</span>
+    </p>
+    <div class="cards">
+      <div class="card">
+        <span class="tag"><span class="en">NOW ENROLLING · PILOT</span><span class="th">เปิดรับสมัคร · รอบ PILOT</span></span>
+        <h3>🏪 My First Business Day</h3>
+        <p>
+          <span class="en">A full-day workshop — your child dreams up a product, prices it, borrows real startup capital from our "bank", sells at Market Day, then closes the day counting profit and splitting it into three envelopes with their own hands.</span>
+          <span class="th">Workshop 1 วันเต็ม — เด็กคิดสินค้าจากสิ่งที่ชอบ ตั้งราคา กู้ทุนจริงจาก "ธนาคาร" เปิดร้านขายใน Market Day แล้วปิดวันด้วยการนับกำไรและแบ่งเงินใส่ซอง 3 ใบด้วยตัวเอง</span>
+        </p>
+        <ul>
+          <li><span class="en">Ages 9–13 · max 16–18 kids</span><span class="th">อายุ 9–13 ปี · กลุ่มละ 16–18 คน</span></li>
+          <li><span class="en">Real startup capital + customer coupons for parents</span><span class="th">ทุนตั้งร้านจริง + คูปองลูกค้าสำหรับผู้ปกครอง</span></li>
+          <li><span class="en">Kids keep 100% of their profit</span><span class="th">กำไรเป็นของเด็ก 100%</span></li>
+        </ul>
+        <div class="price">3,500.- <small><span class="en">/ child · Pilot intro price 2,900.-</span><span class="th">/ คน · รอบ Pilot ราคาแนะนำ 2,900.-</span></small></div>
+        <a class="btn" href="#cta"><span class="en">Reserve a Seat</span><span class="th">จองที่นั่ง</span></a>
+      </div>
+      <div class="card">
+        <span class="tag soon"><span class="en">COMING SOON</span><span class="th">เร็ว ๆ นี้</span></span>
+        <h3>🚀 Young Founder Course</h3>
+        <p>
+          <span class="en">A 6-week journey to build a real business from your child's own passion — self-discovery, branding, a real market day mid-course, and a Demo Day finale pitching on stage in front of the family.</span>
+          <span class="th">คอร์ส 6 สัปดาห์ สร้างธุรกิจจริงจาก passion ของเด็กแต่ละคน — ค้นหาตัวเอง ปั้นแบรนด์ ขายจริงกลางคอร์ส และปิดท้ายด้วย Demo Day ขึ้นเวที pitch ต่อหน้าครอบครัว</span>
+        </p>
+        <ul>
+          <li><span class="en">Once a week × 6 weeks</span><span class="th">สัปดาห์ละ 1 ครั้ง × 6 สัปดาห์</span></li>
+          <li><span class="en">Small-team mentoring</span><span class="th">Mentor ประกบทีมเล็ก</span></li>
+          <li><span class="en">Your child's first business ledger</span><span class="th">สมุดบัญชีธุรกิจเล่มแรกของลูก</span></li>
+        </ul>
+        <div class="price"><span class="en">Opens after the pilot</span><span class="th">เปิดจองหลังรอบ Pilot</span> <small><span class="en">· Waitlist open</span><span class="th">· Waitlist เปิดแล้ว</span></small></div>
+        <a class="btn ghost" href="#cta"><span class="en">Join Waitlist</span><span class="th">ลงชื่อรอ</span></a>
+      </div>
+      <div class="card">
+        <span class="tag soon"><span class="en">FOR SCHOOLS</span><span class="th">สำหรับโรงเรียน</span></span>
+        <h3>🏫 School Program</h3>
+        <p>
+          <span class="en">Bring Market Day and our money curriculum into your EP / Bilingual / International school as an enrichment or after-school program — co-designed with your academic team.</span>
+          <span class="th">ยก Market Day และหลักสูตรการเงินไปจัดในโรงเรียน EP / Bilingual / International เป็นกิจกรรม enrichment หรือ after-school — ออกแบบร่วมกับฝ่ายวิชาการได้</span>
+        </p>
+        <ul>
+          <li><span class="en">Taught bilingually in English & Thai</span><span class="th">สอนสองภาษา อังกฤษ–ไทย</span></li>
+          <li><span class="en">Age-adapted for Grades 4–9</span><span class="th">ปรับเนื้อหาตามช่วงวัย ป.4–ม.3</span></li>
+          <li><span class="en">Individual progress reports for parents</span><span class="th">รายงานผลลัพธ์รายบุคคลถึงผู้ปกครอง</span></li>
+        </ul>
+        <div class="price"><span class="en">Custom pricing</span><span class="th">ราคาตามรูปแบบงาน</span> <small><span class="en">· Talk to our team</span><span class="th">· นัดคุยกับทีมเรา</span></small></div>
+        <a class="btn ghost" href="#cta"><span class="en">Contact Us</span><span class="th">ติดต่อเรา</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="loop">
+  <div class="wrap">
+    <span class="eyebrow"><span class="en">How Kids Learn</span><span class="th">วิธีเรียนของเด็ก</span></span>
+    <h2><span class="en">The 6-step learning loop — do first, understand forever</span><span class="th">วงจรการเรียนรู้ 6 ขั้น — ลงมือก่อน แล้วค่อยตกผลึก</span></h2>
+    <p class="lead">
+      <span class="en">We never lecture the word "cost" from a whiteboard — kids discover it themselves while counting money after closing their shop. It's how the world's best programs teach, and it's what no free video can give your child.</span>
+      <span class="th">เราไม่สอนคำว่า "ต้นทุน" จากกระดาน — เด็กจะค้นพบมันเองตอนนับเงินหลังปิดร้าน นี่คือวิธีที่โปรแกรมระดับโลกใช้ และเป็นสิ่งที่วิดีโอฟรีบนอินเทอร์เน็ตให้ไม่ได้</span>
+    </p>
+    <div class="loop-grid">
+      <div class="step"><h3><span class="en">Find what they love</span><span class="th">ค้นหาสิ่งที่รัก</span></h3><p><span class="en">A child's business must grow from who they are — not from reselling someone else's stuff.</span><span class="th">ธุรกิจของเด็กต้องงอกจากตัวตนและสิ่งที่เขาสนใจ — ไม่ใช่หยิบของมาขายต่อ</span></p></div>
+      <div class="step"><h3><span class="en">Shape an idea that helps</span><span class="th">ปั้นไอเดียแก้ปัญหา</span></h3><p><span class="en">Every product must answer one question: "Who does it help?" — the seed of an entrepreneur's mindset.</span><span class="th">สินค้า/บริการต้องตอบคำถามเดียว: "มันช่วยใคร?" — จุดเริ่มของ mindset ผู้ประกอบการ</span></p></div>
+      <div class="step"><h3><span class="en">Build a brand + do the math</span><span class="th">สร้างแบรนด์ + คิดเลข</span></h3><p><span class="en">Name the shop, design the sign, work out cost vs. price — then pitch the "bank" for a startup loan.</span><span class="th">ตั้งชื่อร้าน ออกแบบป้าย คำนวณต้นทุน–ราคาขาย และ pitch ขอเงินกู้จาก "ธนาคาร"</span></p></div>
+      <div class="step"><h3><span class="en">Sell to real customers</span><span class="th">เปิดร้านขายจริง</span></h3><p><span class="en">Market Day with real customers, real money, real haggling — a safe arena, but never a fake one.</span><span class="th">Market Day กับลูกค้าตัวจริง เงินจริง การต่อราคาจริง — สนามที่ปลอดภัยแต่ไม่หลอก</span></p></div>
+      <div class="step"><h3><span class="en">Count, repay, split the profit</span><span class="th">นับเงิน คืนหนี้ แบ่งกำไร</span></h3><p><span class="en">Repay the loan first; what's left is truly theirs — a lesson about debt and profit that lasts a lifetime.</span><span class="th">คืนเงินกู้ก่อน ที่เหลือคือกำไรของเด็ก — บทเรียนเรื่องหนี้และกำไรที่จำไปทั้งชีวิต</span></p></div>
+      <div class="step"><h3><span class="en">Tell the story on stage</span><span class="th">ขึ้นเวทีเล่าเรื่อง</span></h3><p><span class="en">The day ends with a short pitch to the family: what my business was, and what I learned.</span><span class="th">ปิดท้ายด้วย pitch สั้น ๆ ต่อหน้าครอบครัว: ธุรกิจฉันคืออะไร และฉันได้เรียนรู้อะไร</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="money" class="env-band">
+  <div class="wrap env-grid">
+    <div>
+      <span class="eyebrow"><span class="en">Money Skills</span><span class="th">ทักษะการเงิน</span></span>
+      <h2><span class="en">Every baht of profit ends in three envelopes</span><span class="th">กำไรทุกบาท จบที่ซอง 3 ใบ</span></h2>
+      <p class="lead">
+        <span class="en">Your child doesn't sit through a "savings class" — they manage profit they earned with their own hands, following the Earn–Save–Spend–Share principle used to teach millions of kids worldwide.</span>
+        <span class="th">เด็กไม่ได้ "เรียนวิชาออมเงิน" — เขาบริหารกำไรที่หามาเองกับมือ ตามหลัก Earn–Save–Spend–Share ที่ใช้สอนเด็กหลายล้านคนทั่วโลก</span>
+      </p>
+      <div class="env-list">
+        <div class="env-item"><span class="env-icon">🏦</span><div><b><span class="en">SAVE — at least half</span><span class="th">ซองออม — อย่างน้อยครึ่งหนึ่ง</span></b><p><span class="en">Into their piggy bank or account, toward a goal they set themselves.</span><span class="th">เข้ากระปุกหรือบัญชีของลูก พร้อมเป้าหมายที่เด็กตั้งเอง</span></p></div></div>
+        <div class="env-item"><span class="env-icon">🎁</span><div><b><span class="en">SPEND — the reward for effort</span><span class="th">ซองใช้ — รางวัลความพยายาม</span></b><p><span class="en">Spent proudly, because it was earned — not given.</span><span class="th">ใช้ได้เลยอย่างภูมิใจ เพราะเป็นเงินที่หามาด้วยตัวเอง</span></p></div></div>
+        <div class="env-item"><span class="env-icon">❤️</span><div><b><span class="en">SHARE — the team decides</span><span class="th">ซองแบ่งปัน — ทีมเลือกเอง</span></b><p><span class="en">The team votes on where it goes — good businesses give something back.</span><span class="th">โหวตกันในทีมว่าจะส่งต่อให้ใคร — ธุรกิจที่ดีต้องคืนอะไรให้สังคม</span></p></div></div>
+      </div>
+    </div>
+    <figure class="env-art" aria-label="Illustration of a child sorting coins into three envelopes">
+      <svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" role="img">
+        <rect width="460" height="380" rx="20" fill="#FDEBBE"/>
+        <g>
+          <circle cx="230" cy="120" r="34" fill="#F3C9A5"/>
+          <path d="M196 114 a34 34 0 0 1 68 0 l0 -12 a34 26 0 0 0 -68 0 z" fill="#22201E"/>
+          <rect x="192" y="86" width="76" height="16" rx="8" fill="#22201E"/>
+          <circle cx="218" cy="122" r="4" fill="#22201E"/>
+          <circle cx="242" cy="122" r="4" fill="#22201E"/>
+          <path d="M219 138 q11 9 22 0" stroke="#22201E" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <rect x="196" y="154" width="68" height="60" rx="20" fill="#0E7A5F"/>
+          <rect x="168" y="160" width="36" height="14" rx="7" fill="#F3C9A5"/>
+          <rect x="256" y="160" width="36" height="14" rx="7" fill="#F3C9A5"/>
+        </g>
+        <circle cx="162" cy="167" r="13" fill="#F5B82E" stroke="#E5A81F" stroke-width="3"/>
+        <text x="162" y="172" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7A5A00">฿</text>
+        <g>
+          <rect x="60" y="260" width="100" height="70" rx="8" fill="#fff" stroke="#0E7A5F" stroke-width="3"/>
+          <path d="M60 268 l50 30 l50 -30" stroke="#0E7A5F" stroke-width="3" fill="none"/>
+          <text class="en" x="110" y="352" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#0A5C48">SAVE</text>
+          <text class="th" x="110" y="352" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#0A5C48">ออม</text>
+          <rect x="180" y="260" width="100" height="70" rx="8" fill="#fff" stroke="#F06B4F" stroke-width="3"/>
+          <path d="M180 268 l50 30 l50 -30" stroke="#F06B4F" stroke-width="3" fill="none"/>
+          <text class="en" x="230" y="352" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#C24A31">SPEND</text>
+          <text class="th" x="230" y="352" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#C24A31">ใช้</text>
+          <rect x="300" y="260" width="100" height="70" rx="8" fill="#fff" stroke="#4A90D9" stroke-width="3"/>
+          <path d="M300 268 l50 30 l50 -30" stroke="#4A90D9" stroke-width="3" fill="none"/>
+          <text class="en" x="350" y="352" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#2F6AA8">SHARE</text>
+          <text class="th" x="350" y="352" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#2F6AA8">แบ่งปัน</text>
+        </g>
+        <circle cx="110" cy="230" r="10" fill="#F5B82E" stroke="#E5A81F" stroke-width="2.5"/>
+        <circle cx="230" cy="238" r="10" fill="#F5B82E" stroke="#E5A81F" stroke-width="2.5"/>
+        <circle cx="350" cy="230" r="10" fill="#F5B82E" stroke="#E5A81F" stroke-width="2.5"/>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow"><span class="en">For Parents</span><span class="th">สำหรับผู้ปกครอง</span></span>
+    <h2><span class="en">The return on this investment</span><span class="th">ผลตอบแทนของการลงทุนครั้งนี้</span></h2>
+    <div class="see-grid">
+      <div class="see"><span class="ic">🎤</span><b><span class="en">A child who dares the stage</span><span class="th">ลูกกล้าขึ้นเวที</span></b><p><span class="en">Pitching their own business to strangers, in their own words.</span><span class="th">pitch ธุรกิจของตัวเองต่อหน้าคนแปลกหน้า ด้วยภาษาของเขาเอง</span></p></div>
+      <div class="see"><span class="ic">📒</span><b><span class="en">Their first ledger</span><span class="th">สมุดบัญชีเล่มแรก</span></b><p><span class="en">Cost, revenue, profit — every line written in their own hand.</span><span class="th">บันทึกต้นทุน–รายรับ–กำไร ที่ลูกเขียนเองทุกบรรทัด</span></p></div>
+      <div class="see"><span class="ic">📸</span><b><span class="en">Market Day memories</span><span class="th">ภาพวันเปิดร้าน</span></b><p><span class="en">Photos and video of your child selling, negotiating, counting — pride you can hold.</span><span class="th">วิดีโอและรูปตอนลูกเชียร์ขาย ต่อรอง และนับเงิน — ความภูมิใจที่จับต้องได้</span></p></div>
+      <div class="see"><span class="ic">🌱</span><b><span class="en">A saving habit that sticks</span><span class="th">นิสัยการออม</span></b><p><span class="en">A goal they set themselves, funded by the first money they ever earned.</span><span class="th">เป้าหมายการออมที่ลูกตั้งเอง พร้อมเงินก้อนแรกจากน้ำพักน้ำแรงของเขา</span></p></div>
+    </div>
+    <div class="quotes">
+      <blockquote class="quote">
+        <p><span class="en">"He came home and talked about cost and profit all night — I've never seen him this excited about learning."</span><span class="th">"ลูกกลับบ้านมาเล่าเรื่องต้นทุนกับกำไรให้ฟังทั้งคืน — ไม่เคยเห็นเขาตื่นเต้นกับการเรียนแบบนี้มาก่อน"</span></p>
+        <footer><span class="en">Mother of P.5 student, bilingual school</span><span class="th">คุณแม่น้องภูมิ · ป.5 โรงเรียนสองภาษา</span></footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p><span class="en">"What moved me wasn't the profit — it was watching our shy daughter stand up and pitch on stage in English."</span><span class="th">"สิ่งที่ประทับใจที่สุดไม่ใช่กำไร แต่คือตอนลูกสาวขี้อายของเราลุกขึ้น pitch หน้าเวทีเป็นภาษาอังกฤษ"</span></p>
+        <footer><span class="en">Father of Grade 6 student, international school</span><span class="th">คุณพ่อน้องพราว · Grade 6 โรงเรียนนานาชาติ</span></footer>
+      </blockquote>
+    </div>
+    <p class="mock-note"><span class="en">* Sample quotes for prototype design — to be replaced with real reviews after the pilot cohort.</span><span class="th">* ข้อความตัวอย่างเพื่อการออกแบบ prototype — จะแทนที่ด้วยรีวิวจริงหลังรอบ Pilot</span></p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2><span class="en">Questions parents ask</span><span class="th">คำถามที่ผู้ปกครองถามบ่อย</span></h2>
+    <details open>
+      <summary><span class="en">My child is shy — will this work for them?</span><span class="th">ลูกขี้อาย ไม่กล้าขายของ จะเรียนได้ไหม?</span></summary>
+      <p><span class="en">Absolutely. Each team has four roles (CEO / Finance / Production / Sales), so a child who prefers the back office learns just as much. And in our experience, shy kids often change the most — the moment "their" shop gets its first customer.</span><span class="th">ได้แน่นอน — ในทีมมี 4 บทบาท (CEO / การเงิน / ผลิต / ขาย) เด็กที่ถนัดอยู่หลังบ้านจะได้เรียนรู้ครบเท่ากัน และเรามักพบว่าเด็กขี้อายคือคนที่เปลี่ยนแปลงชัดที่สุดเมื่อร้าน "ของเขาเอง" เริ่มมีลูกค้า</span></p>
+    </details>
+    <details>
+      <summary><span class="en">What language is it taught in?</span><span class="th">สอนเป็นภาษาอะไร?</span></summary>
+      <p><span class="en">Bilingually in English and Thai, designed specifically for EP / Bilingual / International kids — core business vocabulary (profit, cost, budget) stays in English, while coaching happens in whichever language your child is most comfortable in.</span><span class="th">สองภาษาอังกฤษ–ไทย ออกแบบมาสำหรับเด็ก EP / Bilingual / International โดยเฉพาะ — ศัพท์ธุรกิจหลัก (profit, cost, budget) ใช้ภาษาอังกฤษ ส่วนการโค้ชใช้ภาษาที่เด็กสบายใจที่สุด</span></p>
+    </details>
+    <details>
+      <summary><span class="en">Who keeps the profit?</span><span class="th">เงินกำไรเป็นของใคร?</span></summary>
+      <p><span class="en">Your child — 100%, after repaying the "bank loan". They split it themselves into Save / Spend / Share envelopes; that split is the heart of the lesson. Teams that lose money still take home a symbolic wage — no one leaves empty-handed.</span><span class="th">ของเด็ก 100% หลังคืน "เงินกู้ธนาคาร" — และเด็กจะเป็นคนแบ่งเองใส่ซองออม / ใช้ / แบ่งปัน นี่คือหัวใจของบทเรียน ทีมที่ขาดทุนก็มีค่าแรงเชิงสัญลักษณ์กลับบ้าน ไม่มีใครกลับมือเปล่า</span></p>
+    </details>
+    <details>
+      <summary><span class="en">Do parents need to stay all day?</span><span class="th">ผู้ปกครองต้องอยู่ด้วยทั้งวันไหม?</span></summary>
+      <p><span class="en">No — drop off in the morning, come back around 2 PM to play "customer" at Market Day, with coupons already included in the fee. One rule: you may buy from your own child's shop only once.</span><span class="th">ไม่ต้อง — ส่งลูกตอนเช้า แล้วกลับมาช่วงบ่าย (ประมาณ 14:00) ในบท "ลูกค้า" ของ Market Day พร้อมคูปองที่รวมอยู่ในค่าคอร์สแล้ว กติกาเดียวคือ ห้ามอุดหนุนร้านลูกตัวเองเกิน 1 ครั้ง</span></p>
+    </details>
+    <details>
+      <summary><span class="en">What if my child's shop loses money?</span><span class="th">ถ้าร้านของลูกขาดทุนล่ะ?</span></summary>
+      <p><span class="en">That might be the most valuable lesson of the day. We design failure to be small enough to be safe, but real enough to remember. Kids debrief what they'd do differently next time — a skill no school teaches.</span><span class="th">นั่นอาจเป็นบทเรียนที่คุ้มที่สุดของวัน — เราออกแบบ debrief ให้ความล้มเหลวเล็กพอที่ปลอดภัย แต่จริงพอที่จะจำ เด็กจะสรุปเองว่าครั้งหน้าจะทำอะไรต่าง และนั่นคือทักษะที่โรงเรียนไหนก็ไม่ได้สอน</span></p>
+    </details>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="wrap">
+    <div class="final">
+      <h2><span class="en">18 seats. One Saturday. Skills for life.</span><span class="th">18 ที่นั่ง หนึ่งวันเสาร์ ทักษะติดตัวตลอดชีวิต</span></h2>
+      <p><span class="en">You've invested in their grades, their languages, their future school. This is the investment in everything that comes after — give your child one Saturday to own their first business, and money lessons that last a lifetime.</span><span class="th">คุณลงทุนกับเกรด ภาษา และโรงเรียนของลูกมาตลอด — นี่คือการลงทุนในสิ่งที่เหลือทั้งหมดหลังจากนั้น ให้วันเสาร์หนึ่งวันของลูก เป็นวันที่เขาได้เป็นเจ้าของธุรกิจครั้งแรกในชีวิต พร้อมบทเรียนเรื่องเงินที่จะติดตัวไปตลอด</span></p>
+      <a class="btn" href="#" onclick="alert(document.body.classList.contains('th') ? 'Prototype: หน้าจองที่นั่งจะเชื่อมต่อในเวอร์ชันถัดไป' : 'Prototype: booking page will be connected in the next version'); return false;"><span class="en">Reserve a Seat / Ask About Dates</span><span class="th">จองที่นั่ง / สอบถามรอบเรียน</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <b>KidBiz Academy</b> <span style="opacity:.6"><span class="en">(working name)</span><span class="th">(ชื่อชั่วคราว)</span></span><br>
+        <span class="en">A money & business academy for kids aged 9–13<br>Bangkok, Thailand · hello@kidbiz.example</span>
+        <span class="th">โรงเรียนธุรกิจและทักษะการเงินสำหรับเด็ก 9–13 ปี<br>กรุงเทพมหานคร · hello@kidbiz.example</span>
+      </div>
+      <div>
+        <span class="en">Programs: My First Business Day · Young Founder · School Program<br>Taught bilingually for EP / Bilingual / International families</span>
+        <span class="th">โปรแกรม: My First Business Day · Young Founder · School Program<br>สอนสองภาษา อังกฤษ–ไทย สำหรับครอบครัว EP / Bilingual / International</span>
+      </div>
+    </div>
+    <div class="proto">⚠️ <span class="en">PROTOTYPE — concept demonstration site, not yet in operation · prices and reviews are design samples</span><span class="th">PROTOTYPE — เว็บไซต์ตัวอย่างเพื่อนำเสนอแนวคิด ยังไม่เปิดให้บริการจริง · ข้อมูลราคาและรีวิวเป็นตัวอย่างประกอบการออกแบบ</span></div>
+  </div>
+</footer>
+
+<script>
+  function setLang(l){
+    document.body.classList.remove('en','th');
+    document.body.classList.add(l);
+    document.documentElement.lang = (l === 'th') ? 'th' : 'en';
+    document.getElementById('langBtn').textContent = (l === 'th') ? 'EN' : 'ไทย';
+    try{ localStorage.setItem('kb-lang', l); }catch(e){}
+  }
+  function toggleLang(){
+    setLang(document.body.classList.contains('th') ? 'en' : 'th');
+  }
+  (function(){
+    var saved = 'en';
+    try{ saved = localStorage.getItem('kb-lang') || 'en'; }catch(e){}
+    setLang(saved);
+  })();
+</script>
+
+</body>
+</html>
