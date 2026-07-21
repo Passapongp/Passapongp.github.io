@@ -1,0 +1,253 @@
+<title>KidBiz Academy — Financial Summary</title>
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#FAF8F3; --ink:#1B2A23; --muted:#63736A;
+    --green:#0E7A5F; --green-deep:#0A5C48; --gold:#F5B82E; --gold-soft:#FDF3D9;
+    --line:#E2DACA; --red:#C4553D;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#101A15; --surface:#18251E; --ink:#EDF3EE; --muted:#93A79A;
+           --green:#3DBF93; --green-deep:#2E9E78; --gold:#F5B82E; --gold-soft:#2C3826;
+           --line:#27352D; --red:#E07A60; }
+  }
+  :root[data-theme="dark"]{ --bg:#101A15; --surface:#18251E; --ink:#EDF3EE; --muted:#93A79A;
+       --green:#3DBF93; --green-deep:#2E9E78; --gold:#F5B82E; --gold-soft:#2C3826;
+       --line:#27352D; --red:#E07A60; }
+  :root[data-theme="light"]{ --bg:#FFFFFF; --surface:#FAF8F3; --ink:#1B2A23; --muted:#63736A;
+       --green:#0E7A5F; --green-deep:#0A5C48; --gold:#F5B82E; --gold-soft:#FDF3D9;
+       --line:#E2DACA; --red:#C4553D; }
+  *{box-sizing:border-box; margin:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans Thai","Leelawadee UI","Sukhumvit Set",-apple-system,"Segoe UI",sans-serif;
+    line-height:1.45; -webkit-font-smoothing:antialiased; padding:28px 24px 40px;
+  }
+  .sheet{max-width:960px; margin:0 auto}
+
+  header{border-bottom:3px solid var(--green); padding-bottom:14px; margin-bottom:22px}
+  h1{font-size:1.7rem; font-weight:800; letter-spacing:-.01em}
+  header .sub{font-size:.9rem; color:var(--muted); margin-top:4px}
+  header .date{font-size:.75rem; color:var(--muted); margin-top:8px}
+
+  h2{
+    font-size:1.05rem; font-weight:800; margin:26px 0 10px;
+    display:flex; align-items:center; gap:9px;
+  }
+  h2 .n{
+    width:24px; height:24px; flex:none; border-radius:6px; background:var(--green); color:#fff;
+    display:grid; place-items:center; font-size:.78rem;
+  }
+
+  table{width:100%; border-collapse:collapse; font-size:.9rem; margin-top:4px}
+  th{
+    text-align:left; padding:7px 12px; font-size:.72rem; font-weight:700; letter-spacing:.04em;
+    color:var(--muted); text-transform:uppercase; border-bottom:1.5px solid var(--line);
+  }
+  th.r, td.r{text-align:right}
+  td{padding:6px 12px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums}
+  td.lbl{font-variant-numeric:normal}
+  tr.total td{font-weight:800; border-top:1.5px solid var(--ink); border-bottom:none; background:var(--gold-soft)}
+  tr.sub td{color:var(--muted); font-size:.84rem}
+  .hi{color:var(--green); font-weight:800}
+
+  .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:18px 0 4px}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--green);
+    border-radius:9px; padding:12px 14px;
+  }
+  .card b{display:block; font-size:1.5rem; font-weight:800; color:var(--green);
+          font-variant-numeric:tabular-nums; line-height:1.1}
+  .card span{font-size:.72rem; color:var(--muted); display:block; margin-top:3px; line-height:1.3}
+
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:26px}
+
+  .bar{height:22px; border-radius:4px; background:var(--green); display:inline-block}
+  .note{
+    background:var(--surface); border-left:3px solid var(--gold); border-radius:0 8px 8px 0;
+    padding:11px 15px; font-size:.86rem; margin-top:12px;
+  }
+  .note b{color:var(--ink)}
+
+  ul.assump{list-style:none; padding:0; font-size:.86rem; display:grid; gap:5px; margin-top:6px}
+  ul.assump li{padding-left:18px; position:relative; color:var(--muted)}
+  ul.assump li::before{content:"▸"; position:absolute; left:2px; color:var(--green)}
+  ul.assump b{color:var(--ink)}
+
+  footer{margin-top:30px; padding-top:14px; border-top:1px solid var(--line);
+         font-size:.74rem; color:var(--muted)}
+
+  @media print{
+    body{padding:0; background:#fff}
+    h2{page-break-after:avoid}
+    table, .cards{page-break-inside:avoid}
+  }
+  @media (max-width:800px){
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .two{grid-template-columns:1fr; gap:0}
+  }
+</style>
+
+<div class="sheet">
+
+<header>
+  <h1>KidBiz Academy — สรุปตัวเลขทางการเงิน</h1>
+  <div class="sub">ค่ายค้นหาตัวตนและทักษะธุรกิจสำหรับเด็ก 9–13 ปี · 2 วัน 1 คืน</div>
+  <div class="date">ข้อมูล ณ กรกฎาคม 2569 · ตัวเลขเป็นประมาณการจากสมมติฐานที่ระบุท้ายเอกสาร</div>
+</header>
+
+<div class="cards">
+  <div class="card"><b>28,000</b><span>ราคาต่อคน (บาท)</span></div>
+  <div class="card"><b>43%</b><span>อัตรากำไรต่อรอบ</span></div>
+  <div class="card"><b>15 คน</b><span>จุดคุ้มทุน จาก 30 ที่นั่ง</span></div>
+  <div class="card"><b>6 เดือน</b><span>ระยะเวลาคืนทุน</span></div>
+</div>
+
+<!-- 1 -->
+<h2><span class="n">1</span> ธุรกิจทำเงินอย่างไร — ต่อ 1 รอบ</h2>
+
+<div class="two">
+  <div>
+    <table>
+      <thead><tr><th>รายรับ</th><th class="r">บาท</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">ค่าคอร์ส 30 คน × 28,000</td><td class="r">840,000</td></tr>
+        <tr class="total"><td class="lbl">รวมรายรับ</td><td class="r">840,000</td></tr>
+      </tbody>
+    </table>
+
+    <table style="margin-top:16px">
+      <thead><tr><th>ผลลัพธ์</th><th class="r">บาท</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">รายรับ</td><td class="r">840,000</td></tr>
+        <tr><td class="lbl">หัก ต้นทุนดำเนินงาน</td><td class="r">370,600</td></tr>
+        <tr><td class="lbl">หัก ค่าใช้จ่ายบริษัท (เฉลี่ย)</td><td class="r">106,700</td></tr>
+        <tr class="total"><td class="lbl">กำไรต่อรอบ</td><td class="r hi">362,700</td></tr>
+        <tr class="sub"><td class="lbl">อัตรากำไร</td><td class="r">43%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <table>
+      <thead><tr><th>ต้นทุนดำเนินงาน</th><th class="r">บาท</th><th class="r">%</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">สถานที่ + อาหาร</td><td class="r">166,500</td><td class="r">45%</td></tr>
+        <tr><td class="lbl">ทีมงานหน้างาน (13 คน)</td><td class="r">90,000</td><td class="r">24%</td></tr>
+        <tr><td class="lbl">การตลาด + ค่าเสื่อม</td><td class="r">56,500</td><td class="r">15%</td></tr>
+        <tr><td class="lbl">อื่น ๆ (ประกัน · ภาพ · รางวัล)</td><td class="r">42,000</td><td class="r">12%</td></tr>
+        <tr><td class="lbl">วัสดุอุปกรณ์ต่อเด็ก</td><td class="r">15,600</td><td class="r">4%</td></tr>
+        <tr class="total"><td class="lbl">รวม</td><td class="r">370,600</td><td class="r">100%</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>อัตราส่วนดูแล 1 : 2.3</b> — ทีมงาน 13 คนต่อเด็ก 30 คน คือต้นทุนก้อนใหญ่ที่สุด และเป็นสิ่งที่ทำให้คู่แข่งลอกได้ยาก การประเมินตัวตนเด็กต้องอาศัยการสังเกตจากคนจริง
+    </div>
+  </div>
+</div>
+
+<!-- 2 -->
+<h2><span class="n">2</span> ถ้าขายได้ไม่เต็ม — ยังกำไรไหม</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>จำนวนเด็ก/รอบ</th><th class="r">รายรับ</th><th class="r">ต้นทุนผันแปร</th>
+      <th class="r">ต้นทุนคงที่</th><th class="r">กำไร/ขาดทุน</th><th>สถานะ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>15 คน (50%)</td><td class="r">420,000</td><td class="r">58,500</td><td class="r">360,300</td><td class="r">+1,200</td><td>คุ้มทุนพอดี</td></tr>
+    <tr><td>20 คน (67%)</td><td class="r">560,000</td><td class="r">78,000</td><td class="r">360,300</td><td class="r hi">+121,700</td><td>กำไร</td></tr>
+    <tr><td>25 คน (83%)</td><td class="r">700,000</td><td class="r">97,500</td><td class="r">360,300</td><td class="r hi">+242,200</td><td>กำไร</td></tr>
+    <tr class="total"><td>30 คน (เต็ม)</td><td class="r">840,000</td><td class="r">117,000</td><td class="r">360,300</td><td class="r hi">+362,700</td><td>กำไร</td></tr>
+  </tbody>
+</table>
+
+<div class="note">
+  <b>จุดคุ้มทุนอยู่ที่ 15 คน จาก 30 ที่นั่ง</b> — ขายได้เพียงครึ่งเดียวก็ไม่ขาดทุน
+  และเนื่องจากผู้ปกครองชำระเงินล่วงหน้าก่อนวันจัดงาน บริษัทจึงทราบยอดจองก่อนเกิดค่าใช้จ่ายหลัก <b>สามารถเลื่อนหรือยกเลิกรอบได้หากยอดไม่ถึงเป้า</b>
+</div>
+
+<!-- 3 -->
+<h2><span class="n">3</span> เงินลงทุนไปที่ไหน — 1,250,000 บาท</h2>
+
+<div class="two">
+  <table>
+    <thead><tr><th>รายการ</th><th class="r">บาท</th><th class="r">%</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">ค่าตอบแทนทีมก่อนถึงจุดคุ้มทุน</td><td class="r">475,000</td><td class="r">38%</td></tr>
+      <tr><td class="lbl">ระบบประเมิน First Compass</td><td class="r">200,000</td><td class="r">16%</td></tr>
+      <tr><td class="lbl">เงินหมุนเวียน + สำรอง</td><td class="r">180,000</td><td class="r">14%</td></tr>
+      <tr><td class="lbl">การตลาดเปิดตัว</td><td class="r">100,000</td><td class="r">8%</td></tr>
+      <tr><td class="lbl">รอบทดลอง (เก็บค่าเข้าร่วมครึ่งราคา)</td><td class="r">90,000</td><td class="r">7%</td></tr>
+      <tr><td class="lbl">อุปกรณ์ 6 ฐานกิจกรรม</td><td class="r">80,000</td><td class="r">6%</td></tr>
+      <tr><td class="lbl">เว็บไซต์ + ระบบรับสมัคร</td><td class="r">50,000</td><td class="r">4%</td></tr>
+      <tr><td class="lbl">กฎหมาย + ประกันภัย</td><td class="r">40,000</td><td class="r">3%</td></tr>
+      <tr><td class="lbl">แบรนด์</td><td class="r">30,000</td><td class="r">2%</td></tr>
+      <tr class="total"><td class="lbl">รวม</td><td class="r">1,245,000</td><td class="r">100%</td></tr>
+    </tbody>
+  </table>
+
+  <div>
+    <table>
+      <thead><tr><th>แผนดำเนินงานและการคืนทุน</th><th class="r">กำไรสะสม</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl"><b>เดือน 1</b> — สร้างระบบ · อุปกรณ์ · เปิดการตลาด</td><td class="r">—</td></tr>
+        <tr><td class="lbl"><b>เดือน 2</b> — รอบทดลอง · เปิดขายรอบจริง</td><td class="r">—</td></tr>
+        <tr><td class="lbl"><b>เดือน 3</b> — รอบขายจริงรอบที่ 1</td><td class="r">363,000</td></tr>
+        <tr><td class="lbl"><b>เดือน 4</b> — รอบที่ 2</td><td class="r">726,000</td></tr>
+        <tr><td class="lbl"><b>เดือน 5</b> — รอบที่ 3</td><td class="r">1,089,000</td></tr>
+        <tr class="total"><td class="lbl"><b>เดือน 6</b> — รอบที่ 4 · <b>คืนทุนครบ</b></td><td class="r hi">1,452,000</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>ผู้ปกครองชำระเงินล่วงหน้า</b> ทำให้ธุรกิจไม่ต้องใช้เงินทุนหมุนเวียนหลังเปิดดำเนินการ — <b>เงินลงทุนก้อนนี้เป็นก้อนเดียวที่ต้องการ</b> ไม่มีการระดมทุนรอบถัดไป
+    </div>
+  </div>
+</div>
+
+<!-- 4 -->
+<h2><span class="n">4</span> ประมาณการรายปี</h2>
+
+<table>
+  <thead>
+    <tr><th>ปี</th><th class="r">จำนวนรอบ</th><th class="r">เด็ก (คน)</th><th class="r">รายได้</th><th class="r">กำไร</th><th class="r">อัตรากำไร</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><b>ปีที่ 1</b> (ทยอยเพิ่มรอบ)</td><td class="r">16</td><td class="r">480</td><td class="r">13,440,000</td><td class="r hi">5,800,000</td><td class="r">43%</td></tr>
+    <tr class="total"><td><b>ปีที่ 2</b> (2 รอบ/เดือน)</td><td class="r">24</td><td class="r">720</td><td class="r">20,160,000</td><td class="r hi">9,560,000</td><td class="r">47%</td></tr>
+  </tbody>
+</table>
+
+<div class="note">
+  <b>โอกาสเพิ่มเติมที่ยังไม่รวมในตัวเลข:</b> รายได้จากผู้สนับสนุน (ธนาคารธุรกิจ · สถาบันการเงิน · ประกัน) ซึ่งเข้าถึงกลุ่มผู้ปกครองที่มีกำลังซื้อสูง 720 ครอบครัวต่อปี ประเมินไว้ที่ 2–3 ล้านบาท/ปี — <b>ยังไม่นำมาคิดในแผน เนื่องจากต้องมีสถิติย้อนหลังก่อนจึงจะเจรจาได้</b>
+</div>
+
+<!-- 5 -->
+<h2><span class="n">5</span> สมมติฐานหลัก</h2>
+
+<div class="two">
+  <ul class="assump">
+    <li>ราคาขาย <b>28,000 บาท/คน</b> — เทียบกับค่ายพัฒนาทักษะระดับพรีเมียมในตลาดที่ 22,000 บาท (2 วัน ไม่ค้างคืน)</li>
+    <li>ความจุ <b>30 คน/รอบ</b> · 5 กลุ่ม กลุ่มละ 6 คน</li>
+    <li>ทีมหน้างาน <b>13 คน</b> — นักจิตวิทยาเด็ก 1 · พี่เลี้ยง 10 · ผู้บริหารโครงการ 2</li>
+    <li>ที่พักระดับโรงแรม 4 ดาว <b>3,000–3,800 บาท/ห้อง/คืน</b> (ราคากรุ๊ป)</li>
+  </ul>
+  <ul class="assump">
+    <li>ต้นทุนการได้ลูกค้า <b>1,333 บาท/คน</b></li>
+    <li>ค่าใช้จ่ายบริษัท <b>142,250 บาท/เดือน</b> — ทีมประจำ 2 คน + เอเจนซีการตลาด</li>
+    <li>ปีที่ 1 จัดได้ <b>16 รอบ</b> (ทยอยเพิ่มจาก 1 เป็น 2 รอบ/เดือน)</li>
+    <li>ยังไม่รวมรายได้จากผู้สนับสนุนและโปรแกรมสำหรับโรงเรียน</li>
+  </ul>
+</div>
+
+<div class="note">
+  <b>สิ่งที่ต้องพิสูจน์ในรอบทดลอง:</b> ราคาที่ผู้ปกครองยอมรับได้จริง · ต้นทุนการได้ลูกค้าจริง · ใบเสนอราคาโรงแรมจริง —
+  รอบทดลองเดือนที่ 2 ออกแบบมาเพื่อยืนยันสามข้อนี้ก่อนขยายจำนวนรอบ
+</div>
+
+<footer>
+  KidBiz Academy (ชื่อชั่วคราว) · เอกสารนี้จัดทำเพื่อประกอบการพิจารณาร่วมลงทุน · ตัวเลขทั้งหมดเป็นประมาณการ ยังไม่ผ่านการตรวจสอบโดยผู้สอบบัญชี
+</footer>
+
+</div>
