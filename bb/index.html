@@ -42,7 +42,8 @@
 
   .set-label{display:inline-flex;align-items:center;gap:9px;background:#fff;border:3px solid #ffd166;color:#B4820E;
     font-family:'Baloo 2',sans-serif;font-weight:700;font-size:19px;padding:8px 22px;border-radius:100px;
-    box-shadow:0 6px 0 rgba(255,209,102,.35);margin:6px 0 22px}
+    box-shadow:0 6px 0 rgba(255,209,102,.35);margin:36px 0 22px}
+  .set-label:first-of-type{margin-top:6px}
 
   .cards{display:flex;flex-direction:column;gap:18px}
   .card{
@@ -75,7 +76,7 @@
     <header>
       <div class="mascot">⭐</div>
       <h1>BB's Learning</h1>
-      <div class="subtitle">มาเรียนภาษาอังกฤษกันเถอะ! 🎉</div>
+      <div class="subtitle">มาเรียนสนุกกันเถอะ! 🎉</div>
     </header>
 
     <div id="content"></div>
@@ -87,17 +88,103 @@
     // ▼▼ เพิ่มบทเรียนใหม่ที่นี่ได้เลย — ก็อป 1 บล็อกแล้วแก้ค่า ▼▼
     const SETS = [
       {
-        label: 'Set 4 · Movers',
+        label: 'วิทยาศาสตร์ ป.2',
         items: [
-          { emoji:'📖', title:'Word List 4', sub:'คำศัพท์ Cambridge Movers', color:'#FFB703',
+          { emoji:'🔬', title:'หน่วย 1 วิทยาศาสตร์น่ารู้', sub:'วิทย์ ป.2', color:'#4CC9F0',
+            url:'https://claude.ai/public/artifacts/0875bb9e-8e0c-47c4-bf8a-d23fd7acb1b2' },
+          { emoji:'🧪', title:'หน่วย 2 วัสดุรอบตัวเรา', sub:'วิทย์ ป.2', color:'#8AC926',
+            url:'https://claude.ai/public/artifacts/9351b020-93e3-47e8-830f-f18b824f33a6' },
+        ]
+      },
+      {
+        label: 'ภาษาไทย ป.2',
+        items: [
+          { emoji:'📕', title:'หลักภาษาและการใช้ภาษา', sub:'กลางภาค เทอม 1', color:'#F15BB5',
+            url:'https://claude.ai/public/artifacts/cfdb06bd-1661-4fa6-b9a6-cb0eb179aaea' },
+        ]
+      },
+      {
+        label: 'คณิตศาสตร์ ป.2',
+        items: [
+          { emoji:'🔢', title:'บทที่ 1 จำนวนนับไม่เกิน 1,000 และ 0', sub:'คณิต ป.2 เล่ม 1', color:'#FFB703',
+            url:'https://claude.ai/public/artifacts/26421947-4e0b-42f2-899c-a36fddc53aeb' },
+          { emoji:'➕', title:'บทที่ 2 การบวกและการลบจำนวนนับไม่เกิน 1,000', sub:'คณิต ป.2 เล่ม 1', color:'#FF6B8A',
+            url:'https://claude.ai/public/artifacts/36086f94-f270-4655-9ef9-ffb2214277f8' },
+        ]
+      },
+      {
+        label: 'Science · Cambridge Primary 2',
+        items: [
+          { emoji:'🌍', title:'Unit 1 Environments & Unit 2 Forces', sub:'2.1 Forces around us', color:'#06D6A0',
+            url:'https://claude.ai/public/artifacts/862cce21-6e58-48cd-8112-fc1d7403c0e6' },
+        ]
+      },
+      {
+        label: 'Set 1 · Reading and Writing',
+        items: [
+          { emoji:'📖', title:'Word List 1', sub:'บัญชีคำศัพท์', color:'#FFB703',
+            url:'https://claude.ai/public/artifacts/baceb975-096c-4559-ad4c-7efafad3b3e8' },
+          { emoji:'✏️', title:'Mini-test 1.1', sub:'แบบทดสอบ', color:'#4CC9F0',
+            url:'https://claude.ai/public/artifacts/542e6f17-a154-4ceb-a1f2-c84f27303919' },
+          { emoji:'📝', title:'Mini-test 1.2', sub:'แบบทดสอบ', color:'#8AC926',
+            url:'https://claude.ai/public/artifacts/4ea9f456-d456-44a5-a742-57de16a66794' },
+        ]
+      },
+      {
+        label: 'Set 2 · Reading and Writing',
+        items: [
+          { emoji:'📖', title:'Word List 2', sub:'บัญชีคำศัพท์', color:'#FFB703',
+            url:'https://claude.ai/public/artifacts/3725ecd2-99fe-42a3-8565-33d445c7d273' },
+          { emoji:'✏️', title:'Mini-test 2.1', sub:'แบบทดสอบ', color:'#4CC9F0',
+            url:'https://claude.ai/public/artifacts/16ccee48-d717-4990-a6e2-4c14c4f9bb60' },
+          { emoji:'📝', title:'Mini-test 2.2', sub:'แบบทดสอบ', color:'#8AC926',
+            url:'https://claude.ai/public/artifacts/e3b4cccb-19f6-4cb2-9128-14ded7ff28b4' },
+        ]
+      },
+      {
+        label: 'Set 3 · Reading and Writing',
+        items: [
+          { emoji:'📖', title:'Word List 3', sub:'บัญชีคำศัพท์', color:'#FFB703',
+            url:'https://claude.ai/public/artifacts/a83003b0-4d54-4c1f-beae-94460f5007c8' },
+          { emoji:'✏️', title:'Mini-test 3.1', sub:'แบบทดสอบ', color:'#4CC9F0',
+            url:'https://claude.ai/public/artifacts/c567b7d9-19f6-44a8-87e3-dea227bd0765' },
+          { emoji:'📝', title:'Mini-test 3.2', sub:'แบบทดสอบ', color:'#8AC926',
+            url:'https://claude.ai/public/artifacts/b23a3918-607d-49f6-b975-3d707cefe5e8' },
+        ]
+      },
+      {
+        label: 'Set 4 · Reading and Writing',
+        items: [
+          { emoji:'📖', title:'Word List 4', sub:'บัญชีคำศัพท์', color:'#FFB703',
             url:'https://claude.ai/public/artifacts/a83003b0-4d54-4c1f-beae-94460f5007c8' },
           { emoji:'✏️', title:'Mini-test 4.1', sub:'แบบทดสอบ', color:'#4CC9F0',
             url:'https://claude.ai/public/artifacts/64772e23-a908-4a66-b2ec-16437eeb4ad1' },
           { emoji:'📝', title:'Mini-test 4.2', sub:'แบบทดสอบ', color:'#8AC926',
             url:'https://claude.ai/public/artifacts/61c71900-9dc3-4000-900b-08ebd1261c7f' },
         ]
+      },
+      {
+        label: 'Maths · Cambridge Primary 2',
+        items: [
+          { emoji:'1️⃣', title:'Unit 1 Number to 100', sub:'Maths Cambridge P2', color:'#4CC9F0',
+            url:'https://claude.ai/public/artifacts/4b1f1344-bd59-4d8d-85b5-09b335ac60bd' },
+          { emoji:'📐', title:'Unit 2 Geometry', sub:'Maths Cambridge P2', color:'#8AC926',
+            url:'https://claude.ai/public/artifacts/5be00f3a-6366-4e32-8911-ceaa6d7bb3a2' },
+          { emoji:'📊', title:'Unit 4 Statistics', sub:'Maths Cambridge P2', color:'#FFB703',
+            url:'https://claude.ai/public/artifacts/d19129a8-dd2a-47d9-ab33-f069aaf3c282' },
+          { emoji:'🔤', title:'Unit 8.1 Number words', sub:'Maths Cambridge P2', color:'#F15BB5',
+            url:'https://claude.ai/public/artifacts/d166aba4-6888-447f-83c8-a175f102ee2b' },
+        ]
+      },
+      {
+        label: 'English · Cambridge Primary 2',
+        items: [
+          { emoji:'🏫', title:'Unit 1 A day at school', sub:'English Cambridge P2', color:'#4CC9F0',
+            url:'https://claude.ai/public/artifacts/cd7da827-e27c-449c-891d-bc9e11b9483f' },
+          { emoji:'🏡', title:'Unit 2 Good neighbours', sub:'English Cambridge P2', color:'#FF6B8A',
+            url:'https://claude.ai/public/artifacts/44fbe8cb-885e-478e-bc08-68f5d379d0d9' },
+        ]
       }
-      // , { label:'Set 5', items:[ { emoji:'📖', title:'...', sub:'...', color:'#F15BB5', url:'...' } ] }
     ];
     // ▲▲ เพิ่มบทเรียนใหม่ด้านบนนี้ ▲▲
 
