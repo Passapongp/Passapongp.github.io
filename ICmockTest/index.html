@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ซ้อมข้อสอบ IC Plain</title>
+<meta name="description" content="เครื่องมือซ้อมข้อสอบผู้แนะนำการลงทุนตราสารทั่วไป พร้อมเฉลยและหลักการของแต่ละหัวข้อ">
+<meta name="theme-color" content="#00B1CB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600&family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark">IC</span>
+      <span>
+        <b>ซ้อมข้อสอบ IC Plain</b>
+        <small>ผู้แนะนำการลงทุนตราสารทั่วไป</small>
+      </span>
+    </div>
+    <button id="btn-home" class="ghost" hidden>ออกจากชุด</button>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+
+  <!-- ---------------- หน้าเลือกโหมด ---------------- -->
+  <section id="screen-home">
+
+    <div class="card intro">
+      <h1>เลือกวิธีซ้อม</h1>
+      <p>ตอบแล้วเฉลยทันที พร้อมหลักการของหัวข้อนั้นเพื่อให้ตอบข้อถัดไปได้เอง ไม่ใช่แค่จำคำตอบ</p>
+      <p class="muted" id="bank-line">กำลังโหลดคลังข้อสอบ…</p>
+    </div>
+
+    <div class="card">
+      <h2>ซ้อมทั้งฉบับ</h2>
+      <p class="muted">เรียงตามบลูพรินต์จริง หมวด 1 จำนวน 30 ข้อ · หมวด 2 จำนวน 20 ข้อ · หมวด 3 จำนวน 50 ข้อ</p>
+      <div class="row" id="full-sets"></div>
+    </div>
+
+    <div class="card">
+      <h2>ซ้อมรายหัวข้อ</h2>
+      <p class="muted">เลือกหัวข้อที่ยังไม่แม่น · ตัวเลขคือจำนวนข้อในคลัง</p>
+      <div class="grid" id="topic-list"></div>
+    </div>
+
+    <div class="card">
+      <h2>สุ่ม</h2>
+      <div class="row">
+        <button class="btn" data-random="20">สุ่ม 20 ข้อ</button>
+        <button class="btn" data-random="50">สุ่ม 50 ข้อ</button>
+        <button class="btn" data-random="100">สุ่ม 100 ข้อ</button>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn warn" id="btn-wrong" disabled>ทบทวนเฉพาะข้อที่เคยตอบผิด</button>
+      </div>
+    </div>
+
+    <div class="card" id="stats-card" hidden>
+      <h2>สถิติของคุณ</h2>
+      <div class="stats" id="stats-body"></div>
+      <button class="btn danger small" id="btn-reset">ล้างสถิติทั้งหมด</button>
+    </div>
+
+  </section>
+
+  <!-- ---------------- หน้าทำข้อสอบ ---------------- -->
+  <section id="screen-quiz" hidden>
+
+    <div class="quizbar">
+      <div class="progress"><span id="bar"></span></div>
+      <div class="quizmeta">
+        <span id="counter">1 / 20</span>
+        <span id="topic-chip" class="chip"></span>
+        <span id="score-chip" class="chip ok">ถูก 0</span>
+      </div>
+    </div>
+
+    <div class="card question">
+      <p class="qno" id="qsource"></p>
+      <p class="qtext" id="qtext"></p>
+      <div id="choices" class="choices"></div>
+    </div>
+
+    <div class="card verdict" id="verdict" hidden></div>
+
+    <div class="card concept" id="concept" hidden></div>
+
+    <div class="actions">
+      <button class="btn ghost" id="btn-skip">ข้ามข้อนี้</button>
+      <button class="btn primary" id="btn-next" hidden>ข้อถัดไป</button>
+    </div>
+
+  </section>
+
+  <!-- ---------------- หน้าสรุปผล ---------------- -->
+  <section id="screen-done" hidden>
+    <div class="card">
+      <h1 id="done-title">จบชุดแล้ว</h1>
+      <p class="bigscore" id="done-score"></p>
+      <p id="done-verdict" class="muted"></p>
+    </div>
+    <div class="card">
+      <h2>แยกตามหัวข้อ</h2>
+      <div id="done-breakdown"></div>
+    </div>
+    <div class="card">
+      <h2>ข้อที่ตอบผิด</h2>
+      <div id="done-wrong"></div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" id="btn-again">ซ้อมชุดใหม่</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p>เครื่องมือซ้อมส่วนตัว ไม่ใช่ข้อสอบจริง · เฉลยและหลักการอ้างอิงหลักสูตรผู้แนะนำการลงทุนตราสารทั่วไป</p>
+  <p id="foot-bank" class="muted"></p>
+</footer>
+
+<!-- ข้อมูลโหลดด้วย script ไม่ใช่ fetch เพื่อให้ดับเบิลคลิกเปิดไฟล์จากเครื่องได้เลย
+     โดยไม่ต้องมีเซิร์ฟเวอร์ · questions-mock.js เป็นชุดส่วนตัว ไม่ได้ขึ้น GitHub
+     ถ้าไม่มีไฟล์นั้นก็ยังใช้งานได้ตามปกติ -->
+<script src="data/topics.js"></script>
+<script src="data/questions.js"></script>
+<script src="data/questions-mock.js" onerror="window.IC_MOCK_MISSING=1"></script>
+<script src="app.js"></script>
+</body>
+</html>
